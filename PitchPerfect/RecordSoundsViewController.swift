@@ -42,7 +42,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let filePath = URL(string: pathArray.joined(separator: "/"))
         
         let session = AVAudioSession.sharedInstance()
-        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
+        try! session.setCategory(convertFromAVAudioSessionCategory(AVAudioSession.Category.playAndRecord), with:AVAudioSession.CategoryOptions.defaultToSpeaker)
         
         try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
         audioRecorder.delegate = self
@@ -81,3 +81,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
+}
